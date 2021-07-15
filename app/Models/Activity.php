@@ -15,4 +15,9 @@ class Activity extends Model
   {
     return $this->belongsTo(User::class);
   }
+
+  public function activity_updates()
+  {
+    return $this->hasMany(ActivityUpdate::class);
+  }
 }

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\ActivityUpdate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 
@@ -22,7 +24,7 @@ class ActivityController extends Controller
    */
   public function index()
   {
-    return response()->json(Activity::with('user')->get());
+    return response()->json(Activity::with('user', 'activity_updates')->get());
   }
 
   /**
@@ -35,6 +37,7 @@ class ActivityController extends Controller
   {
     $fields = $this->validate($request, [
       'activity' => 'required|min:3|max:255',
+      'status' => 'in:Pending,Done',
       'user_id' => 'required|exists:users,id'
     ]);
 
@@ -64,14 +67,31 @@ class ActivityController extends Controller
   {
     $fields = $this->validate($request, [
       'activity' => 'required|min:3|max:255',
+      'remark' => 'max:255',
       'user_id' => 'required|exists:users,id',
+      'status' => 'in:Pending,Done',
       'updator_id' => 'required|exists:users,id',
     ]);
-    $activity = Activity::find($id);
-    
-    // $activity->update($fields);
 
-    return response()->json($request->all());
+    $activity = Activity::find($id);
+    $activity_update = null;
+
+
+    DB::transaction(function () use ($activity, $fields, $id, &$activity_update) {
+      if ($fields['status'] != $activity['status']) {
+        $stmt = "Activity status changed from  {$activity['status']} to  {$fields['status']}";
+        
+        $activity_update = ActivityUpdate::create([
+          'update' => $stmt,
+          'activity_id' => $id,
+          'user_id' => $fields['updator_id']
+        ]);
+      }
+        
+      $activity->update($fields);
+    });
+
+    return response()->json(['activity' => $request->all(), 'updates' => $activity_update]);
   }
 
   /**

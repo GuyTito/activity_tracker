@@ -1,19 +1,24 @@
 <template>
   <div>
-    <h2>{{activity.activity}}</h2>
-    <p>{{activity.user && activity.user.name}}</p>
-    what if an activity does not exist and any number is placed in the url?
-
-    <form @submit.prevent="onUpdate">
-      <select name="status" v-model="selected_status" id="status">
-        <option :value="activity.status">{{activity.status}}</option>
-        <option v-if="activity.status == 'Pending'" value="Done">Done</option>
-        <option v-if="activity.status == 'Done'" value="Pending">Pending</option>
-      </select>
-
-      <input type="text" name="remark" id="remark" v-model="remark" placeholder="Input remark"/>
-      <button type="submit">Update</button>
-    </form>
+    <div v-if="activity">
+      <h2>{{activity.activity}}</h2>
+      <p>{{activity.user && activity.user.name}}</p>
+      what if an activity does not exist and any number is placed in the url?
+  
+      <form @submit.prevent="onUpdate">
+        <select name="status" v-model="selected_status" id="status">
+          <option :value="activity.status">{{activity.status}}</option>
+          <option v-if="activity.status == 'Pending'" value="Done">Done</option>
+          <option v-if="activity.status == 'Done'" value="Pending">Pending</option>
+        </select>
+  
+        <input type="text" name="remark" id="remark" v-model="remark" placeholder="Input remark"/>
+        <button type="submit">Update</button>
+      </form>
+    </div>
+    <div v-else>
+      Activity does not exist. <router-link to="/activity/create">Create one.</router-link>
+    </div>
   </div>
 </template>
 
@@ -30,9 +35,6 @@ export default {
     if (!this.$store.state.token) {
       this.$router.push("/login");
     }
-    if (!this.$store.state.activities) {
-      this.$router.push("activity/create");
-    }
 
     let activities = JSON.parse(JSON.stringify(this.$store.state.activities));
     var lookup = {};
@@ -40,7 +42,9 @@ export default {
       lookup[activities[i].id] = activities[i];
     }
     this.activity = lookup[this.$route.params.id];
-    this.selected_status = this.activity.status
+    this.selected_status = this.activity.status ?? ''
+
+    
   },
   methods: {
     onUpdate(){
@@ -57,17 +61,13 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response.data);
-          // this.$store.dispatch("fetchAllActivities");
-          // this.$router.push(`/activity/show/${this.activity.id}`)
+          this.$store.dispatch("fetchAllActivities");
+          this.$router.push(`/activity/show/${this.activity.id}`)
         })
         .catch((err) => {
-          this.loading = false;
           alert("Oops! " + err.response.data.message);
           return
         });
-
-      // this.$router.push(`/activity/show/${this.activity.id}`)
     }
   },
 };

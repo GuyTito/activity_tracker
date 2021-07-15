@@ -21,6 +21,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -137,20 +166,89 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _vm._v("\n  display the updates done and stuff\n  "),
-      _c("h2", [_vm._v(_vm._s(_vm.activity.activity))]),
-      _vm._v(" "),
-      _c("p", [_vm._v(_vm._s(_vm.activity.user && _vm.activity.user.name))]),
-      _vm._v(" "),
-      _c("router-link", { attrs: { to: "/activity/show/" + _vm.activity.id } })
-    ],
-    1
-  )
+  return _c("div", [
+    _vm.activity
+      ? _c("div", { attrs: { div: "" } }, [
+          _vm._v("\n    display the updates done and stuff\n    "),
+          _c("h2", [_vm._v(_vm._s(_vm.activity.activity))]),
+          _vm._v(" "),
+          _c("small", [
+            _vm._v(" Status: " + _vm._s(_vm.activity.status) + " ")
+          ]),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("small", [
+            _vm._v(
+              " Creator: " + _vm._s(_vm.activity.user && _vm.activity.user.name)
+            )
+          ]),
+          _vm._v(" "),
+          _vm.activity.activity_updates != undefined
+            ? _c(
+                "div",
+                [
+                  _c("table", [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.activity.activity_updates, function(
+                        item,
+                        counter
+                      ) {
+                        return _c("tr", { key: item.id }, [
+                          _c("td", [_vm._v(_vm._s(counter + 1))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(item.update))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(item.created_at))])
+                        ])
+                      }),
+                      0
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    { attrs: { to: "/activity/edit/" + _vm.activity.id } },
+                    [_vm._v("Update")]
+                  )
+                ],
+                1
+              )
+            : _c("div", [
+                _vm._v("\n      No updates available for activity.\n    ")
+              ])
+        ])
+      : _c(
+          "div",
+          [
+            _vm._v("\n    Activity does not exist. "),
+            _c("router-link", { attrs: { to: "/activity/create" } }, [
+              _vm._v("Create one.")
+            ])
+          ],
+          1
+        )
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Updates")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Time")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 

@@ -40,6 +40,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {};
@@ -157,41 +162,53 @@ var render = function() {
         _vm._v("Create Activity")
       ]),
       _vm._v(" "),
-      _vm.activities
-        ? _c("table", [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.activities, function(activity, counter) {
-                return _c("tr", { key: activity.id }, [
-                  _c("td", [_vm._v(_vm._s(counter + 1))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(activity.activity))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(activity.status))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(activity.remark || "None"))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(activity.user.name))]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    [
-                      _c(
-                        "router-link",
-                        { attrs: { to: "/activity/edit/" + activity.id } },
-                        [_vm._v("Update")]
-                      )
-                    ],
-                    1
-                  )
-                ])
-              }),
-              0
-            )
+      _vm.activities.length
+        ? _c("div", [
+            _c("table", [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.activities, function(activity, counter) {
+                  return _c("tr", { key: activity.id }, [
+                    _c("td", [_vm._v(_vm._s(counter + 1))]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      [
+                        _c(
+                          "router-link",
+                          { attrs: { to: "/activity/show/" + activity.id } },
+                          [_vm._v(_vm._s(activity.activity))]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(activity.status))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(activity.remark || "None"))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(activity.user.name))]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      [
+                        _c(
+                          "router-link",
+                          { attrs: { to: "/activity/edit/" + activity.id } },
+                          [_vm._v("Update")]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                }),
+                0
+              )
+            ])
           ])
-        : _vm._e()
+        : _c("div", [_vm._v("\n    No activities available.\n  ")])
     ],
     1
   )

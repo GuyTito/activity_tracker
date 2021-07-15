@@ -16,7 +16,7 @@ class AuthController extends Controller
     $fields = $this->validate($request, [
       'name' => 'required|max:255',
       'email' => 'required|email|max:255|unique:users',
-      'password' => 'required|confirmed',
+      'password' => 'required|confirmed|min:3',
     ]);
 
     $fields['password'] = Hash::make($request->password);

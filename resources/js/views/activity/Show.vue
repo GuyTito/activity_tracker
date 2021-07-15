@@ -1,10 +1,39 @@
 <template>
   <div>
-    display the updates done and stuff
-    <h2>{{activity.activity}}</h2>
-    <p>{{activity.user && activity.user.name}}</p>
+    <div div v-if="activity">
+      display the updates done and stuff
+      <h2>{{ activity.activity }}</h2>
+      <small> Status: {{activity.status}} </small>
+      <br>
+      <small> Creator: {{ activity.user && activity.user.name }}</small>
+  
+      <div v-if="activity.activity_updates != undefined">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Updates</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, counter) in activity.activity_updates" :key="item.id">
+              <td>{{ counter + 1 }}</td>
+              <td>{{ item.update }}</td>
+              <td>{{ item.created_at }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <router-link :to="`/activity/edit/${activity.id}`">Update</router-link>
+      </div>
+      <div v-else>
+        No updates available for activity.
+      </div>
+    </div>
+    <div v-else>
+      Activity does not exist. <router-link to="/activity/create">Create one.</router-link>
+    </div>
 
-    <router-link :to="`/activity/show/${activity.id}`"></router-link>
   </div>
 </template>
 

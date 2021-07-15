@@ -30,6 +30,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -39,12 +44,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
+    var _this$activity$status;
+
     if (!this.$store.state.token) {
       this.$router.push("/login");
-    }
-
-    if (!this.$store.state.activities) {
-      this.$router.push("activity/create");
     }
 
     var activities = JSON.parse(JSON.stringify(this.$store.state.activities));
@@ -55,7 +58,7 @@ __webpack_require__.r(__webpack_exports__);
     }
 
     this.activity = lookup[this.$route.params.id];
-    this.selected_status = this.activity.status;
+    this.selected_status = (_this$activity$status = this.activity.status) !== null && _this$activity$status !== void 0 ? _this$activity$status : '';
   },
   methods: {
     onUpdate: function onUpdate() {
@@ -72,13 +75,13 @@ __webpack_require__.r(__webpack_exports__);
           Authorization: "Bearer ".concat(this.$store.state.token)
         }
       }).then(function (response) {
-        console.log(response.data); // this.$store.dispatch("fetchAllActivities");
-        // this.$router.push(`/activity/show/${this.activity.id}`)
+        _this.$store.dispatch("fetchAllActivities");
+
+        _this.$router.push("/activity/show/".concat(_this.activity.id));
       })["catch"](function (err) {
-        _this.loading = false;
         alert("Oops! " + err.response.data.message);
         return;
-      }); // this.$router.push(`/activity/show/${this.activity.id}`)
+      });
     }
   }
 });
@@ -174,97 +177,114 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h2", [_vm._v(_vm._s(_vm.activity.activity))]),
-    _vm._v(" "),
-    _c("p", [_vm._v(_vm._s(_vm.activity.user && _vm.activity.user.name))]),
-    _vm._v(
-      "\n  what if an activity does not exist and any number is placed in the url?\n\n  "
-    ),
-    _c(
-      "form",
-      {
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-            return _vm.onUpdate.apply(null, arguments)
-          }
-        }
-      },
-      [
-        _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.selected_status,
-                expression: "selected_status"
-              }
-            ],
-            attrs: { name: "status", id: "status" },
-            on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.selected_status = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              }
-            }
-          },
-          [
-            _c("option", { domProps: { value: _vm.activity.status } }, [
-              _vm._v(_vm._s(_vm.activity.status))
-            ]),
-            _vm._v(" "),
-            _vm.activity.status == "Pending"
-              ? _c("option", { attrs: { value: "Done" } }, [_vm._v("Done")])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.activity.status == "Done"
-              ? _c("option", { attrs: { value: "Pending" } }, [
-                  _vm._v("Pending")
-                ])
-              : _vm._e()
-          ]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
+    _vm.activity
+      ? _c("div", [
+          _c("h2", [_vm._v(_vm._s(_vm.activity.activity))]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(_vm._s(_vm.activity.user && _vm.activity.user.name))
+          ]),
+          _vm._v(
+            "\n    what if an activity does not exist and any number is placed in the url?\n\n    "
+          ),
+          _c(
+            "form",
             {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.remark,
-              expression: "remark"
-            }
-          ],
-          attrs: {
-            type: "text",
-            name: "remark",
-            id: "remark",
-            placeholder: "Input remark"
-          },
-          domProps: { value: _vm.remark },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.onUpdate.apply(null, arguments)
+                }
               }
-              _vm.remark = $event.target.value
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("button", { attrs: { type: "submit" } }, [_vm._v("Update")])
-      ]
-    )
+            },
+            [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.selected_status,
+                      expression: "selected_status"
+                    }
+                  ],
+                  attrs: { name: "status", id: "status" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.selected_status = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                [
+                  _c("option", { domProps: { value: _vm.activity.status } }, [
+                    _vm._v(_vm._s(_vm.activity.status))
+                  ]),
+                  _vm._v(" "),
+                  _vm.activity.status == "Pending"
+                    ? _c("option", { attrs: { value: "Done" } }, [
+                        _vm._v("Done")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.activity.status == "Done"
+                    ? _c("option", { attrs: { value: "Pending" } }, [
+                        _vm._v("Pending")
+                      ])
+                    : _vm._e()
+                ]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.remark,
+                    expression: "remark"
+                  }
+                ],
+                attrs: {
+                  type: "text",
+                  name: "remark",
+                  id: "remark",
+                  placeholder: "Input remark"
+                },
+                domProps: { value: _vm.remark },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.remark = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("button", { attrs: { type: "submit" } }, [_vm._v("Update")])
+            ]
+          )
+        ])
+      : _c(
+          "div",
+          [
+            _vm._v("\n    Activity does not exist. "),
+            _c("router-link", { attrs: { to: "/activity/create" } }, [
+              _vm._v("Create one.")
+            ])
+          ],
+          1
+        )
   ])
 }
 var staticRenderFns = []
