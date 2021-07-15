@@ -50,6 +50,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -168,7 +172,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _vm.activity
-      ? _c("div", { attrs: { div: "" } }, [
+      ? _c("div", [
           _vm._v("\n    display the updates done and stuff\n    "),
           _c("h2", [_vm._v(_vm._s(_vm.activity.activity))]),
           _vm._v(" "),
@@ -179,12 +183,18 @@ var render = function() {
           _c("br"),
           _vm._v(" "),
           _c("small", [
+            _vm._v(" Remark: " + _vm._s(_vm.activity.remark) + " ")
+          ]),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("small", [
             _vm._v(
               " Creator: " + _vm._s(_vm.activity.user && _vm.activity.user.name)
             )
           ]),
           _vm._v(" "),
-          _vm.activity.activity_updates != undefined
+          _vm.activity.activity_updates && _vm.activity.activity_updates.length
             ? _c(
                 "div",
                 [
@@ -202,6 +212,8 @@ var render = function() {
                           _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(item.update))]),
                           _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(item.user.name))]),
+                          _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(item.created_at))])
                         ])
                       }),
@@ -218,7 +230,7 @@ var render = function() {
                 1
               )
             : _c("div", [
-                _vm._v("\n      No updates available for activity.\n    ")
+                _vm._v("\n      No updates made for this activity.\n    ")
               ])
         ])
       : _c(
@@ -243,6 +255,8 @@ var staticRenderFns = [
         _c("th", [_vm._v("#")]),
         _vm._v(" "),
         _c("th", [_vm._v("Updates")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Updated By")]),
         _vm._v(" "),
         _c("th", [_vm._v("Time")])
       ])

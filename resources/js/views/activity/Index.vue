@@ -11,7 +11,7 @@
             <th>Activity</th>
             <th>Status</th>
             <th>Remark</th>
-            <th>Creator</th>
+            <th>Created By</th>
           </tr>
         </thead>
         <tbody>

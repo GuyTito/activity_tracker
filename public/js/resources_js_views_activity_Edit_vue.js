@@ -44,7 +44,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    var _this$activity$status;
+    var _this$activity$status, _this$activity$remark;
 
     if (!this.$store.state.token) {
       this.$router.push("/login");
@@ -59,6 +59,7 @@ __webpack_require__.r(__webpack_exports__);
 
     this.activity = lookup[this.$route.params.id];
     this.selected_status = (_this$activity$status = this.activity.status) !== null && _this$activity$status !== void 0 ? _this$activity$status : '';
+    this.remark = (_this$activity$remark = this.activity.remark) !== null && _this$activity$remark !== void 0 ? _this$activity$remark : '';
   },
   methods: {
     onUpdate: function onUpdate() {

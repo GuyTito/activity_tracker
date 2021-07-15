@@ -43,6 +43,7 @@ export default {
     }
     this.activity = lookup[this.$route.params.id];
     this.selected_status = this.activity.status ?? ''
+    this.remark = this.activity.remark ?? ''
 
     
   },

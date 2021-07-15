@@ -24,7 +24,7 @@ class ActivityController extends Controller
    */
   public function index()
   {
-    return response()->json(Activity::with('user', 'activity_updates')->get());
+    return response()->json(Activity::with('user:id,name' , 'activity_updates.user:id,name')->get());
   }
 
   /**

@@ -1,18 +1,21 @@
 <template>
   <div>
-    <div div v-if="activity">
+    <div v-if="activity">
       display the updates done and stuff
       <h2>{{ activity.activity }}</h2>
       <small> Status: {{activity.status}} </small>
       <br>
+      <small> Remark: {{activity.remark}} </small>
+      <br>
       <small> Creator: {{ activity.user && activity.user.name }}</small>
   
-      <div v-if="activity.activity_updates != undefined">
+      <div v-if="activity.activity_updates && activity.activity_updates.length">
         <table>
           <thead>
             <tr>
               <th>#</th>
               <th>Updates</th>
+              <th>Updated By</th>
               <th>Time</th>
             </tr>
           </thead>
@@ -20,6 +23,7 @@
             <tr v-for="(item, counter) in activity.activity_updates" :key="item.id">
               <td>{{ counter + 1 }}</td>
               <td>{{ item.update }}</td>
+              <td>{{ item.user.name }}</td>
               <td>{{ item.created_at }}</td>
             </tr>
           </tbody>
@@ -27,7 +31,7 @@
         <router-link :to="`/activity/edit/${activity.id}`">Update</router-link>
       </div>
       <div v-else>
-        No updates available for activity.
+        No updates made for this activity.
       </div>
     </div>
     <div v-else>
