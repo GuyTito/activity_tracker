@@ -35,12 +35,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       activity: {},
       selected_status: '',
-      remark: ''
+      remark: '',
+      loading: false
     };
   },
   mounted: function mounted() {
@@ -71,6 +75,7 @@ __webpack_require__.r(__webpack_exports__);
       data = Object.assign({
         'updator_id': this.$store.state.user.id
       }, data);
+      this.loading = true;
       axios.put("/api/activity/".concat(this.activity.id), data, {
         headers: {
           Authorization: "Bearer ".concat(this.$store.state.token)
@@ -80,6 +85,7 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.$router.push("/activity/show/".concat(_this.activity.id));
       })["catch"](function (err) {
+        _this.loading = true;
         alert("Oops! " + err.response.data.message);
         return;
       });
@@ -272,7 +278,19 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("button", { attrs: { type: "submit" } }, [_vm._v("Update")])
+              _c("button", { attrs: { type: "submit" } }, [
+                _vm.loading
+                  ? _c("img", {
+                      attrs: {
+                        src: "/assets/spinning.gif",
+                        alt: "loading...",
+                        width: "12",
+                        height: "12"
+                      }
+                    })
+                  : _vm._e(),
+                _vm._v("\n        Update\n      ")
+              ])
             ]
           )
         ])

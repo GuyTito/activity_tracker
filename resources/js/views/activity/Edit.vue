@@ -13,7 +13,10 @@
         </select>
   
         <input type="text" name="remark" id="remark" v-model="remark" placeholder="Input remark"/>
-        <button type="submit">Update</button>
+        <button type="submit">
+          <img src="/assets/spinning.gif" v-if="loading" alt="loading..." width="12" height="12">
+          Update
+        </button>
       </form>
     </div>
     <div v-else>
@@ -28,7 +31,8 @@ export default {
     return {
       activity: {},
       selected_status: '',
-      remark: ''
+      remark: '',
+      loading: false,
     };
   },
   mounted() {
@@ -44,8 +48,6 @@ export default {
     this.activity = lookup[this.$route.params.id];
     this.selected_status = this.activity.status ?? ''
     this.remark = this.activity.remark ?? ''
-
-    
   },
   methods: {
     onUpdate(){
@@ -55,6 +57,7 @@ export default {
       let data = this.activity
       data = Object.assign({'updator_id': this.$store.state.user.id}, data)
 
+      this.loading = true
       axios
         .put(`/api/activity/${this.activity.id}`, data, {
           headers: {
@@ -66,6 +69,7 @@ export default {
           this.$router.push(`/activity/show/${this.activity.id}`)
         })
         .catch((err) => {
+          this.loading = true
           alert("Oops! " + err.response.data.message);
           return
         });

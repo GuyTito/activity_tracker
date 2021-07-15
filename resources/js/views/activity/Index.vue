@@ -34,10 +34,6 @@
 
 <script>
 export default {
-  data() {
-    return {
-    };
-  },
   computed: {
     activities(){
       return this.$store.state.activities
