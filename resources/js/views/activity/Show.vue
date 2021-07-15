@@ -1,14 +1,13 @@
 <template>
   <div>
     <div v-if="activity">
-      display the updates done and stuff
       <h2>{{ activity.activity }}</h2>
-      <small> Status: {{activity.status}} </small>
-      <br>
-      <small> Remark: {{activity.remark}} </small>
-      <br>
-      <small> Creator: {{ activity.user && activity.user.name }}</small>
-  
+      <small> Status: {{ activity.status }} </small>
+      <br />
+      <small> Remark: {{ activity.remark }} </small>
+      <br />
+      <small> Created By: {{ activity.user && activity.user.name }}</small>
+
       <div v-if="activity.activity_updates && activity.activity_updates.length">
         <table>
           <thead>
@@ -24,44 +23,38 @@
               <td>{{ counter + 1 }}</td>
               <td>{{ item.update }}</td>
               <td>{{ item.user.name }}</td>
-              <td>{{ item.created_at }}</td>
+              <td>{{ moment(item.created_at).format("D-MMM-YYYY h:mm:ss a") }}</td>
             </tr>
           </tbody>
         </table>
         <router-link :to="`/activity/edit/${activity.id}`">Update</router-link>
       </div>
-      <div v-else>
-        No updates made for this activity.
-      </div>
+      <div v-else>No updates made for this activity.</div>
     </div>
     <div v-else>
-      Activity does not exist. <router-link to="/activity/create">Create one.</router-link>
+      Activity does not exist.
+      <router-link to="/activity/create">Create one.</router-link>
     </div>
-
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      activity: {},
-    };
-  },
   mounted() {
     if (!this.$store.state.token) {
       this.$router.push("/login");
     }
-    if (!this.$store.state.activities) {
-      this.$router.push("activity/create");
-    }
-
-    let activities = JSON.parse(JSON.stringify(this.$store.state.activities));
-    var lookup = {};
-    for (var i = 0, len = activities.length; i < len; i++) {
-      lookup[activities[i].id] = activities[i];
-    }
-    this.activity = lookup[this.$route.params.id];
+  },
+  computed: {
+    moment: () => moment,
+    activity() {
+      let activities = JSON.parse(JSON.stringify(this.$store.state.activities));
+      var lookup = {};
+      for (var i = 0, len = activities.length; i < len; i++) {
+        lookup[activities[i].id] = activities[i];
+      }
+      return lookup[this.$route.params.id];
+    },
   },
 };
 </script>

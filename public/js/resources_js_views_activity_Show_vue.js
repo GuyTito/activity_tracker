@@ -51,32 +51,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  data: function data() {
-    return {
-      activity: {}
-    };
-  },
   mounted: function mounted() {
     if (!this.$store.state.token) {
       this.$router.push("/login");
     }
+  },
+  computed: {
+    moment: function (_moment) {
+      function moment() {
+        return _moment.apply(this, arguments);
+      }
 
-    if (!this.$store.state.activities) {
-      this.$router.push("activity/create");
+      moment.toString = function () {
+        return _moment.toString();
+      };
+
+      return moment;
+    }(function () {
+      return moment;
+    }),
+    activity: function activity() {
+      var activities = JSON.parse(JSON.stringify(this.$store.state.activities));
+      var lookup = {};
+
+      for (var i = 0, len = activities.length; i < len; i++) {
+        lookup[activities[i].id] = activities[i];
+      }
+
+      return lookup[this.$route.params.id];
     }
-
-    var activities = JSON.parse(JSON.stringify(this.$store.state.activities));
-    var lookup = {};
-
-    for (var i = 0, len = activities.length; i < len; i++) {
-      lookup[activities[i].id] = activities[i];
-    }
-
-    this.activity = lookup[this.$route.params.id];
   }
 });
 
@@ -173,7 +177,6 @@ var render = function() {
   return _c("div", [
     _vm.activity
       ? _c("div", [
-          _vm._v("\n    display the updates done and stuff\n    "),
           _c("h2", [_vm._v(_vm._s(_vm.activity.activity))]),
           _vm._v(" "),
           _c("small", [
@@ -190,7 +193,8 @@ var render = function() {
           _vm._v(" "),
           _c("small", [
             _vm._v(
-              " Creator: " + _vm._s(_vm.activity.user && _vm.activity.user.name)
+              " Created By: " +
+                _vm._s(_vm.activity.user && _vm.activity.user.name)
             )
           ]),
           _vm._v(" "),
@@ -214,7 +218,15 @@ var render = function() {
                           _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(item.user.name))]),
                           _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(item.created_at))])
+                          _c("td", [
+                            _vm._v(
+                              _vm._s(
+                                _vm
+                                  .moment(item.created_at)
+                                  .format("D-MMM-YYYY h:mm:ss a")
+                              )
+                            )
+                          ])
                         ])
                       }),
                       0
@@ -229,14 +241,12 @@ var render = function() {
                 ],
                 1
               )
-            : _c("div", [
-                _vm._v("\n      No updates made for this activity.\n    ")
-              ])
+            : _c("div", [_vm._v("No updates made for this activity.")])
         ])
       : _c(
           "div",
           [
-            _vm._v("\n    Activity does not exist. "),
+            _vm._v("\n    Activity does not exist.\n    "),
             _c("router-link", { attrs: { to: "/activity/create" } }, [
               _vm._v("Create one.")
             ])
