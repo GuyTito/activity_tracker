@@ -2001,7 +2001,7 @@ __webpack_require__.r(__webpack_exports__);
   }, {
     path: '/',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ "resources_js_views_activity_Index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/activity/Index.vue */ "./resources/js/views/activity/Index.vue"));
+      return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module './views/activity/Index.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
     },
     name: 'home'
   }, {
@@ -2017,17 +2017,17 @@ __webpack_require__.r(__webpack_exports__);
   }, {
     path: '/activity/create',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ "resources_js_views_activity_Create_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/activity/Create.vue */ "./resources/js/views/activity/Create.vue"));
+      return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module './views/activity/Create.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
     }
   }, {
     path: '/activity/edit/:id',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ "resources_js_views_activity_Edit_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/activity/Edit.vue */ "./resources/js/views/activity/Edit.vue"));
+      return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module './views/activity/Edit.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
     }
   }, {
     path: '/activity/show/:id',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ "resources_js_views_activity_Show_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./views/activity/Show.vue */ "./resources/js/views/activity/Show.vue"));
+      return Promise.resolve().then(function webpackMissingModule() { var e = new Error("Cannot find module './views/activity/Show.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; });
     }
   }]
 });
@@ -58421,7 +58421,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_views_NotFound_vue":1,"resources_js_views_activity_Index_vue":1,"resources_js_views_Register_vue":1,"resources_js_views_Login_vue":1,"resources_js_views_activity_Create_vue":1,"resources_js_views_activity_Edit_vue":1,"resources_js_views_activity_Show_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_views_NotFound_vue":1,"resources_js_views_Register_vue":1,"resources_js_views_Login_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};
