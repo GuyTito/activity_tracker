@@ -36,10 +36,6 @@ export default {
     };
   },
   mounted() {
-    if (!this.$store.state.token) {
-      this.$router.push("/login");
-    }
-
     let activities = JSON.parse(JSON.stringify(this.$store.state.activities));
     var lookup = {};
     for (var i = 0, len = activities.length; i < len; i++) {

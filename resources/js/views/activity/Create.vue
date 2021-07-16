@@ -46,13 +46,6 @@ export default {
         });
     }
   },
-  mounted() {
-    if (!this.$store.state.token) {
-      this.$router.push("/login");
-    }
-    // this.$store.dispatch("fetchAllItems");
-    // this.$store.dispatch("fetchAllCustomers");
-  },
 };
 </script>
 

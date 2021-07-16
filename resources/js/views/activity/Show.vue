@@ -42,11 +42,6 @@
 
 <script>
 export default {
-  mounted() {
-    if (!this.$store.state.token) {
-      this.$router.push("/login");
-    }
-  },
   computed: {
     moment: () => moment,
     activity() {
