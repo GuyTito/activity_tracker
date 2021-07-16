@@ -21,6 +21,8 @@ export default {
   },
   methods: {
     logout() {
+      this.$store.dispatch("logoutUser")
+      this.$router.push(`/login`);
       axios
         .post("/api/logout", {
           headers: {
@@ -33,9 +35,6 @@ export default {
         .catch((err) => {
           console.log("Oops! " + err.response.data.message);
         });
-
-      this.$store.dispatch("logoutUser")
-      this.$router.push(`/login`);
     },
   },
 };

@@ -2,6 +2,11 @@
   <div>
     <h2>activities</h2>
     <router-link to="/activity/create">Create Activity</router-link>
+
+    <div>
+      <button @click="createdToday">createdToday</button>
+      <button @click="updatedToday">updatedToday</button>
+    </div>
     
     <div v-if="activities.length">
       <table>
@@ -38,14 +43,48 @@
 
 <script>
 export default {
-  computed: {
-    moment: () => moment,
-    activities(){
-      return this.$store.state.activities
+  data(){
+    return {
+      activities: []
     }
   },
+  computed: {
+    moment: () => moment,
+    // activities(){
+    //   return this.$store.state.activities
+    // },
+  },
+  methods:{
+    createdToday(){
+      let today = this.$store.state.activities.filter(
+        (activity) =>
+          moment(activity.created_at).format("D-MMM-YYYY") >=
+          moment().format("D-MMM-YYYY")
+      );
+      this.activities =  today
+    },
+    updatedToday(){
+      let today = this.$store.state.activities.filter(
+        (activity) =>
+          moment(activity.updated_at).format("D-MMM-YYYY") >=
+          moment().format("D-MMM-YYYY")
+      );
+      this.activities =  today
+    },
+  },
   mounted() {
-    this.$store.dispatch("fetchAllActivities");
+    this.$store.dispatch("fetchAllActivities")
+    axios.get('/api/activity', {
+        headers: {
+          Authorization: `Bearer ${this.$store.state.token}`
+        }
+      })
+      .then(response => {
+        this.activities = response.data
+      })
+      .catch(err => {
+        console.log(err.response.data);
+      })
   },
 };
 </script>
