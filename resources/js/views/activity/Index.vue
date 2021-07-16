@@ -12,6 +12,8 @@
             <th>Status</th>
             <th>Remark</th>
             <th>Created By</th>
+            <th>Date Created</th>
+            <th>Date Updated</th>
           </tr>
         </thead>
         <tbody>
@@ -21,6 +23,8 @@
             <td>{{ activity.status }}</td>
             <td>{{ activity.remark || "None" }}</td>
             <td>{{ activity.user.name }}</td>
+            <td>{{ moment(activity.created_at).format("D-MMM-YYYY h:mm:ss a") }}</td>
+            <td>{{ moment(activity.updated_at).format("D-MMM-YYYY h:mm:ss a") }}</td>
             <td><router-link :to="`/activity/edit/${activity.id}`">Update</router-link></td>
           </tr>
         </tbody>
@@ -35,6 +39,7 @@
 <script>
 export default {
   computed: {
+    moment: () => moment,
     activities(){
       return this.$store.state.activities
     }

@@ -7,6 +7,8 @@
       <small> Remark: {{ activity.remark }} </small>
       <br />
       <small> Created By: {{ activity.user && activity.user.name }}</small>
+      <br />
+      <small> Date Created: {{ activity.created_at }}</small>
 
       <div v-if="activity.activity_updates && activity.activity_updates.length">
         <table>
