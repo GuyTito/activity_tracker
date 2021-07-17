@@ -14,7 +14,7 @@
   
         <input type="text" name="remark" id="remark" v-model="remark" placeholder="Input remark"/>
         <button type="submit">
-          <img src="/assets/spinning.gif" v-if="loading" alt="loading..." width="12" height="12">
+          <img src="/images/spinning.gif" v-if="loading" alt="loading..." width="12" height="12">
           Update
         </button>
       </form>
