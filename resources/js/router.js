@@ -33,6 +33,11 @@ const routes = [{
     component: () => import ("./views/activity/Show.vue"),
     meta: {requiresAuth: true },
   },
+  {
+    path: '/activity/search/:date',
+    component: () => import ("./views/activity/Search.vue"),
+    meta: {requiresAuth: true },
+  },
 ]
 
 const router = new VueRouter({

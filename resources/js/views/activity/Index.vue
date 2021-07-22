@@ -1,6 +1,9 @@
 <template>
   <div>
     <h2>activities</h2>
+
+    <SearchActivityByDate />
+
     <router-link to="/activity/create">Create Activity</router-link>
 
     <h3>activities updated_today</h3>
@@ -13,9 +16,10 @@
 
 <script>
 import ActivityList from "../../components/ActivityList.vue";
+import SearchActivityByDate from "../../components/SearchActivityByDate.vue";
 
 export default {
-  components: { ActivityList },
+  components: { ActivityList, SearchActivityByDate, },
   computed: {
     moment: () => moment,
     updated_today(){
