@@ -6,7 +6,7 @@
 
     <router-link to="/activity/create">Create Activity</router-link>
 
-    <h3>activities created from {{moment(this.$route.params.date).format("D-MMM-YYYY")}}</h3>
+    <h3>activities created from {{moment(this.$route.params.date).format("D-MMM-YYYY  h:mm:ss a")}}</h3>
     <ActivityList :activities="createdOnDate" />
   </div>
 </template>

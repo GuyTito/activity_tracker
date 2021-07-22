@@ -11,6 +11,9 @@
 
     <h3>activities created_today</h3>
     <ActivityList :activities="created_today" />
+
+    <h3>All Activities</h3>
+    <ActivityList :activities="all_activities" />
   </div>
 </template>
 
@@ -36,6 +39,9 @@ export default {
           moment(activity.created_at).format("D-MMM-YYYY") >= moment().format("D-MMM-YYYY")
       );
       return today
+    },
+    all_activities(){
+      return this.$store.state.activities
     },
   },
   mounted() {

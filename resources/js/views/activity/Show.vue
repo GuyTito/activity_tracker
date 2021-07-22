@@ -45,12 +45,10 @@ export default {
   computed: {
     moment: () => moment,
     activity() {
-      let activities = JSON.parse(JSON.stringify(this.$store.state.activities));
-      var lookup = {};
-      for (var i = 0, len = activities.length; i < len; i++) {
-        lookup[activities[i].id] = activities[i];
-      }
-      return lookup[this.$route.params.id];
+      let activity = this.$store.state.activities.filter((activity) =>{
+        return activity.id == this.$route.params.id
+      });
+      return activity[0]
     },
   },
 };
