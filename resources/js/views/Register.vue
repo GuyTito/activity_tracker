@@ -1,21 +1,65 @@
 <template>
-  <div>
-    <h2>Register</h2>
-    <form @submit.prevent="onSubmit">
+  <div class="container mt-3">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">Register</div>
 
-      <input type="name" name="name" id="name" v-model="name" placeholder="Name" autofocus>
-      <span v-if="nameError" style="color: red">{{nameError}}</span>
+          <div class="card-body">
+            <form @submit.prevent="onSubmit">
 
-      <input type="email" name="email" id="email" v-model="email" placeholder="Email">
-      <span v-if="emailError" style="color: red">{{emailError}}</span>
+              <div class="form-group row mb-3">
+                <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
 
-      <input type="password" name="password" id="password" v-model="password" placeholder="password">
-      <span v-if="passwordError" style="color: red">{{passwordError}}</span>
+                <div class="col-md-6">
+                  <input name="name" id="name" v-model="name" type="name" class="form-control" required autofocus/>
+                  <div v-if="nameError" class="alert alert-danger" role="alert">
+                    {{ nameError }}
+                  </div>
+                </div>
+              </div>
 
-      <input type="password" name="password_confirmation" id="password_confirmation" v-model="password_confirmation" placeholder="password_confirmation">
-      
-      <button type="submit">Register</button>
-    </form>
+              <div class="form-group row mb-3">
+                <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
+
+                <div class="col-md-6">
+                  <input name="email" id="email" v-model="email" type="email" class="form-control" required/>
+                  <div v-if="emailError" class="alert alert-danger" role="alert">
+                    {{ emailError }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row mb-3">
+                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+
+                <div class="col-md-6">
+                  <input name="password" id="password" v-model="password" type="password" class="form-control" required/>
+
+                  <div v-if="passwordError" class="alert alert-danger" role="alert">
+                    {{ passwordError }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row mb-3">
+                <label for="password_confirmation" class="col-md-4 col-form-label text-md-right">Confirm Password</label>
+
+                <div class="col-md-6">
+                  <input name="password_confirmation" id="password_confirmation" v-model="password_confirmation" type="password" class="form-control" required/>
+                </div>
+              </div>
+
+              <div class="form-group row mb-0">
+                <div class="col-md-8 offset-md-4">
+                  <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
