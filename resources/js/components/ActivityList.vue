@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-if="activities.length">
-      <table>
+    <div v-if="activities.length" class="table-responsive-sm">
+      <table class="table table-hover table-sm">
         <thead>
           <tr>
             <th>#</th>
@@ -11,15 +11,16 @@
             <th>Created By</th>
             <th>Date Created</th>
             <th>Date Updated</th>
+            <th>Update</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(activity, counter) in activities" :key="activity.id">
             <td>{{ counter + 1 }}</td>
             <td>
-              <router-link :to="`/activity/show/${activity.id}`">{{
-                activity.activity
-              }}</router-link>
+              <router-link :to="`/activity/show/${activity.id}`" class="dropdown-item link-primary">
+                {{ activity.activity}}
+              </router-link>
             </td>
             <td>{{ activity.status }}</td>
             <td>{{ activity.remark || "None" }}</td>
@@ -31,9 +32,9 @@
               {{ moment(activity.updated_at).format("D-MMM-YYYY h:mm:ss a") }}
             </td>
             <td>
-              <router-link :to="`/activity/edit/${activity.id}`"
-                >Update</router-link
-              >
+              <router-link :to="`/activity/edit/${activity.id}`" class="text-decoration-none">
+                Update
+              </router-link>
             </td>
           </tr>
         </tbody>
