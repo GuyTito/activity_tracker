@@ -1,16 +1,28 @@
 <template>
-  <div>
-    <h2>activities</h2>
+  <div class="container mt-3">
+    <div class="row">
+      <h2>Activities</h2>
+  
+      <div class="d-flex justify-content-between mb-4">
+        <SearchActivityByDate />
+    
+        <div >
+          <router-link to="/activity/create" role="button" class="btn btn-primary">Create Activity</router-link>
+        </div>
+      </div>
 
-    <SearchActivityByDate />
+      <hr>
+  
+      <ActivityList :activities="updated_today" title="Activities Updated Today" />
+  
+      <hr>
 
-    <router-link to="/activity/create">Create Activity</router-link>
+      <ActivityList :activities="created_today" title="Activities Created Today" />
 
-    <ActivityList :activities="updated_today" title="Activities Updated Today" />
-
-    <ActivityList :activities="created_today" title="Activities Created Today" />
-
-    <ActivityList :activities="all_activities" title="All Activities" />
+      <hr>
+  
+      <ActivityList :activities="all_activities" title="All Activities" />
+    </div>
   </div>
 </template>
 

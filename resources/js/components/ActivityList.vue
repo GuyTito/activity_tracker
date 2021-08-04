@@ -2,7 +2,7 @@
   <div>
     <h3>{{title}}</h3>
     <div v-if="activities.length" class="table-responsive-sm">
-      <table class="table table-hover table-sm">
+      <table class="table table-hover table-sm table-bordered">
         <thead>
           <tr>
             <th>#</th>

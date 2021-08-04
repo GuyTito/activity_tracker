@@ -3,7 +3,7 @@
     <form @submit.prevent="searchActivityByDate">
       <div class="form-group">
         <label for="activity_date" class="col-form-label">Search activity by custom duration</label>
-        <div class="col-md-4">
+        <div>
           <div class="input-group">
             <input
               type="datetime-local"
