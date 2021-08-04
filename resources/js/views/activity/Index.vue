@@ -6,14 +6,11 @@
 
     <router-link to="/activity/create">Create Activity</router-link>
 
-    <h3>activities updated_today</h3>
-    <ActivityList :activities="updated_today" />
+    <ActivityList :activities="updated_today" title="Activities Updated Today" />
 
-    <h3>activities created_today</h3>
-    <ActivityList :activities="created_today" />
+    <ActivityList :activities="created_today" title="Activities Created Today" />
 
-    <h3>All Activities</h3>
-    <ActivityList :activities="all_activities" />
+    <ActivityList :activities="all_activities" title="All Activities" />
   </div>
 </template>
 

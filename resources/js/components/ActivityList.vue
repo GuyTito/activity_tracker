@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h3>{{title}}</h3>
     <div v-if="activities.length" class="table-responsive-sm">
       <table class="table table-hover table-sm">
         <thead>
@@ -48,6 +49,7 @@
 export default {
   props: {
     activities: Array,
+    title: String,
   },
   computed: {
     moment: () => moment,
