@@ -1,17 +1,15 @@
 <template>
-  <div>
+  <div class="container">
     <div v-if="activity">
-      <h2>{{ activity.activity }}</h2>
-      <small> Status: {{ activity.status }} </small>
-      <br />
-      <small> Remark: {{ activity.remark }} </small>
-      <br />
-      <small> Created By: {{ activity.user && activity.user.name }}</small>
-      <br />
-      <small> Date Created: {{ activity.created_at }}</small>
+      <p> <span class="fw-bold">Activity:</span> {{ activity.activity }} </p>
+      <p> <span class="fw-bold">Status:</span> {{ activity.status }} </p>
+      <p> <span class="fw-bold">Remark:</span> {{ activity.remark }} </p>
+      <p> <span class="fw-bold">Created By:</span> {{ activity.user && activity.user.name }}</p>
+      <p> <span class="fw-bold">Date Created:</span> {{ moment(activity.created_at).format("D-MMM-YYYY h:mm:ss a") }}</p>
 
+      <router-link :to="`/activity/edit/${activity.id}`" role="button" class="btn btn-primary mb-3">Update</router-link>
       <div v-if="activity.activity_updates && activity.activity_updates.length">
-        <table>
+        <table class="table table-hover table-sm table-bordered">
           <thead>
             <tr>
               <th>#</th>
@@ -29,7 +27,6 @@
             </tr>
           </tbody>
         </table>
-        <router-link :to="`/activity/edit/${activity.id}`">Update</router-link>
       </div>
       <div v-else>No updates made for this activity.</div>
     </div>
