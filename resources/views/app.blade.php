@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">
+  <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
   <title>Activity Tracker</title>
 </head>
@@ -13,7 +13,7 @@
   <div id="app">
     <app></app>
   </div>
-  <script src="{{ secure_asset('js/app.js') }}" defer></script>
+  <script src="{{ mix('js/app.js') }}" defer></script>
 </body>
 
 </html>
