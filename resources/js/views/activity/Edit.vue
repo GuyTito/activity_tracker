@@ -1,23 +1,32 @@
 <template>
-  <div>
+  <div class="container mt-3">
     <div v-if="activity">
-      <h2>{{activity.activity}}</h2>
-      <p>{{activity.user && activity.user.name}}</p>
-      what if an activity does not exist and any number is placed in the url?
+      <h3><span class="text-info">Activity:</span> {{activity.activity}}</h3>
+
+      <p>Created By: {{activity.user && activity.user.name}}</p>
   
-      <form @submit.prevent="onUpdate">
-        <select name="status" v-model="selected_status" id="status">
-          <option :value="activity.status">{{activity.status}}</option>
-          <option v-if="activity.status == 'Pending'" value="Done">Done</option>
-          <option v-if="activity.status == 'Done'" value="Pending">Pending</option>
-        </select>
-  
-        <input type="text" name="remark" id="remark" v-model="remark" placeholder="Input remark"/>
-        <button type="submit">
-          <img src="/images/spinning.gif" v-if="loading" alt="loading..." width="12" height="12">
-          Update
-        </button>
-      </form>
+      <div class="col-md-4">
+        <form @submit.prevent="onUpdate">
+          <div class="mb-4">
+            <label for="status">Status:</label>
+            <select name="status" v-model="selected_status" class="form-select"  id="status">
+              <option :value="activity.status">{{activity.status}}</option>
+              <option v-if="activity.status == 'Pending'" value="Done">Done</option>
+              <option v-if="activity.status == 'Done'" value="Pending">Pending</option>
+            </select>
+          </div>
+    
+          <div class="mb-4">
+            <label for="remark">Remark:</label>
+            <input type="text" name="remark" id="remark" v-model="remark" class="form-control" placeholder="Input remark"/>
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            <img src="/images/spinning.gif" v-if="loading" alt="loading..." width="12" height="12">
+            Update
+          </button>
+        </form>
+      </div>
     </div>
     <div v-else>
       Activity does not exist. <router-link to="/activity/create">Create one.</router-link>
