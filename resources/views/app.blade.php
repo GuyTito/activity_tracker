@@ -13,7 +13,7 @@
   <div id="app">
     <app></app>
   </div>
-  <script src="{{ secure_asset('js/app.js') }}" defer></script>
+  <script src="{{ mix('js/app.js') }}" defer></script>
 </body>
 
 </html>
