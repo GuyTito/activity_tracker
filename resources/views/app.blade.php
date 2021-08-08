@@ -11,7 +11,7 @@
 
 <body class="antialiased">
   <div id="app">
-    <app></app>
+    {{-- <app></app> --}}
   </div>
   <script src="{{ mix('js/app.js') }}" defer></script>
 </body>
