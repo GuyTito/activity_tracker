@@ -38,14 +38,14 @@ export default {
       let today = this.$store.state.activities.filter((activity) =>{
         if (!activity.activity_updates.length) return false
         let latest_update = activity.activity_updates.slice(-1)[0]
-        return moment(latest_update.created_at).format("D-MMM-YYYY") >= moment().format("D-MMM-YYYY")
+        return moment(latest_update.created_at).format("D-MMM-YYYY") == moment().format("D-MMM-YYYY")
       });
       return today
     },
     created_today(){
       let today = this.$store.state.activities.filter(
         (activity) =>
-          moment(activity.created_at).format("D-MMM-YYYY") >= moment().format("D-MMM-YYYY")
+          moment(activity.created_at).format("D-MMM-YYYY") == moment().format("D-MMM-YYYY")
       );
       return today
     },
