@@ -10,11 +10,11 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-  <div id="app" class=" wrapper flex-grow-1">
+  <div id="app" class="mb-3 wrapper flex-grow-1">
     <app></app>
   </div>
 
-  <footer class="text-center p-2" style="background-color: rgb(240, 239, 239)">
+  <footer class="mt-5 text-center p-2" style="background-color: rgb(240, 239, 239)">
     <a
       class="text-decoration-none text-muted mx-3"
       href="https://twitter.com/QuistKofi"
