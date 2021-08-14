@@ -226,7 +226,7 @@ var render = function() {
                       staticClass: "col-md-4 col-form-label text-md-right",
                       attrs: { for: "email" }
                     },
-                    [_vm._v("E-Mail Addresso")]
+                    [_vm._v("E-Mail Address")]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-6" }, [
